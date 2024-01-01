@@ -45,6 +45,9 @@ export function createMarkup(images) {
   initializeLightbox();
   addPaginationBtn();
   removeLoader();
+  if (refs.container.childElementCount === 0) {
+    removePaginationBtn();
+  }
 }
 
 export function addPaginationBtn() {
@@ -54,7 +57,3 @@ export function addPaginationBtn() {
 export function removePaginationBtn() {
   refs.pagBtn.classList.remove('btn-showed');
 }
-
-// if (refs.pagBtn.classList.contains('btn-showed')) {
-//   removePaginationBtn();
-// }

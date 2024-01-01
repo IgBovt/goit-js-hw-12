@@ -3,7 +3,7 @@ import { addLoader, removeLoader } from './loaders';
 import { clearGallery } from './clearGallery';
 import { NewApiService } from './backend-service';
 import { createMarkup, removePaginationBtn } from './createMarkup';
-import { getWarningAlert } from './alert';
+import { getAlert, getWarningAlert } from './alert';
 
 const refs = getRefs();
 refs.form.addEventListener('submit', onSearch);
