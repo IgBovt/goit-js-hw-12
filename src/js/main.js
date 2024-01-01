@@ -40,7 +40,7 @@ function createMarkup(images) {
   return (refs.container.innerHTML = images.hits
     .map(
       img =>
-        `
+        `   <li>
             <a class="link" href="${img.largeImageURL}">
             <img
                 class="img"
@@ -68,7 +68,8 @@ function createMarkup(images) {
                 <p class="text">${img.downloads}</p>
                 </div>
             </div> </a
-            >`
+            >
+            </li>`
     )
     .join(''));
 }
