@@ -14,3 +14,15 @@ export function getAlert() {
       'Sorry, there are no images matching your search query. Please try again!',
   });
 }
+
+export function getErrorAlert() {
+  return iziToast.warning({
+    backgroundColor: '#EF4040',
+    titleColor: '#fff',
+    messageColor: '#fff',
+    iconUrl: `${err}`,
+    position: 'center',
+    title: 'ERROR',
+    message: 'SERVER REQUEST IS WRONG',
+  });
+}

@@ -1,5 +1,6 @@
 import { getRefs } from './refs';
 import { getAlert } from './alert';
+import { getErrorAlert } from './alert';
 import { initializeLightbox } from './simpleLightBox';
 
 const KEY = '41531809-f9219a766117007ff116a3463';
@@ -8,8 +9,8 @@ refs.form.addEventListener('submit', onSearch);
 
 function onSearch(e) {
   e.preventDefault();
-  refs.span.classList.add('loader');
-  refs.container.innerHTML = '';
+  addLoader();
+  clearGallery();
   const query = e.currentTarget.elements.delay.value.trim();
   getPhoto(query);
   e.currentTarget.reset();
@@ -17,7 +18,7 @@ function onSearch(e) {
 
 function getPhoto(query) {
   fetch(
-    `https://pixabay.com/api/?key=${KEY}&q=${query}&image_type=photo&orientation=horizontal&per_page=21`
+    `https://pixaba1y.com/api/?key=${KEY}&q=${query}&image_type=photo&orientation=horizontal&per_page=21`
   )
     .then(response => {
       if (!response.ok) {
@@ -33,7 +34,7 @@ function getPhoto(query) {
       removeLoader();
       initializeLightbox();
     })
-    .catch(error => console.log('error'));
+    .catch(error => getErrorAlert());
 }
 
 function createMarkup(images) {
@@ -74,6 +75,12 @@ function createMarkup(images) {
     .join(''));
 }
 
+function addLoader() {
+  return refs.span.classList.add('loader');
+}
 function removeLoader() {
   return refs.span.classList.remove('loader');
+}
+function clearGallery() {
+  return (refs.container.innerHTML = '');
 }
