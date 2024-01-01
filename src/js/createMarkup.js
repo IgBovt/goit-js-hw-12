@@ -1,16 +1,16 @@
 import { getRefs } from './refs';
 import { removeLoader } from './loaders';
+import { initializeLightbox } from './simpleLightBox';
 
 const refs = getRefs();
 
 export function createMarkup(images) {
   const refs = getRefs();
 
-  return (
-    (refs.container.innerHTML = images.hits
-      .map(
-        img =>
-          `   <li>
+  refs.container.innerHTML = images.hits
+    .map(
+      img =>
+        `   <li>
             <a class="link" href="${img.largeImageURL}">
             <img
                 class="img"
@@ -40,11 +40,11 @@ export function createMarkup(images) {
             </div> </a
             >
             </li>`
-      )
-      .join('')),
-    addPaginationBtn(),
-    removeLoader()
-  );
+    )
+    .join('');
+  initializeLightbox();
+  addPaginationBtn();
+  removeLoader();
 }
 
 export function addPaginationBtn() {
@@ -54,3 +54,7 @@ export function addPaginationBtn() {
 export function removePaginationBtn() {
   refs.pagBtn.classList.remove('btn-showed');
 }
+
+// if (refs.pagBtn.classList.contains('btn-showed')) {
+//   removePaginationBtn();
+// }

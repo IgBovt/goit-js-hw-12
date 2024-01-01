@@ -2,9 +2,8 @@ import { getRefs } from './refs';
 import { addLoader, removeLoader } from './loaders';
 import { clearGallery } from './clearGallery';
 import { NewApiService } from './backend-service';
-import { createMarkup, addPaginationBtn } from './createMarkup';
+import { createMarkup, removePaginationBtn } from './createMarkup';
 import { getWarningAlert } from './alert';
-import { initializeLightbox } from './simpleLightBox';
 
 const refs = getRefs();
 refs.form.addEventListener('submit', onSearch);
@@ -18,7 +17,7 @@ function onSearch(e) {
   clearGallery();
   newApiService.query = e.currentTarget.elements.delay.value.trim();
   if (newApiService.query === '') {
-    return getWarningAlert();
+    return getWarningAlert(), removeLoader(), removePaginationBtn();
   }
   newApiService.getPhoto().then(images => createMarkup(images));
   e.currentTarget.reset();
