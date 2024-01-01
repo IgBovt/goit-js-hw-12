@@ -34,6 +34,7 @@ function getPhoto(query) {
       createMarkup(images);
       removeLoader();
       initializeLightbox();
+      refs.pagBtn.classList.add('btn-showed');
     })
     .catch(error => getErrorAlert());
 }

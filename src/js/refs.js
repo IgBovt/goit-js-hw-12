@@ -5,5 +5,6 @@ export function getRefs() {
     input: document.querySelector('.js-input'),
     container: document.querySelector('.js-gallery'),
     span: document.querySelector('.js-loader'),
+    pagBtn: document.querySelector('.js-pag-btn'),
   };
 }
