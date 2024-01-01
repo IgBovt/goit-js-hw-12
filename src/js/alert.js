@@ -26,3 +26,11 @@ export function getErrorAlert() {
     message: 'SERVER REQUEST IS WRONG',
   });
 }
+
+export function getWarningAlert() {
+  iziToast.warning({
+    title: 'Caution',
+    message: 'You forgot important data',
+    position: 'center',
+  });
+}
