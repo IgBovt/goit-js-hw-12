@@ -1,6 +1,7 @@
 import { getRefs } from './refs';
-import { getAlert } from './alert';
-import { getErrorAlert } from './alert';
+import { getAlert, getErrorAlert } from './alert';
+import { addLoader, removeLoader } from './loaders';
+import { clearGallery } from './clearGallery';
 import { initializeLightbox } from './simpleLightBox';
 
 const KEY = '41531809-f9219a766117007ff116a3463';
@@ -18,7 +19,7 @@ function onSearch(e) {
 
 function getPhoto(query) {
   fetch(
-    `https://pixaba1y.com/api/?key=${KEY}&q=${query}&image_type=photo&orientation=horizontal&per_page=21`
+    `https://pixabay.com/api/?key=${KEY}&q=${query}&image_type=photo&orientation=horizontal&per_page=21`
   )
     .then(response => {
       if (!response.ok) {
@@ -73,14 +74,4 @@ function createMarkup(images) {
             </li>`
     )
     .join(''));
-}
-
-function addLoader() {
-  return refs.span.classList.add('loader');
-}
-function removeLoader() {
-  return refs.span.classList.remove('loader');
-}
-function clearGallery() {
-  return (refs.container.innerHTML = '');
 }
