@@ -3,7 +3,7 @@ import { addLoader, removeLoader } from './loaders';
 import { clearGallery } from './clearGallery';
 import { NewApiService } from './backend-service';
 import { createMarkup, removePaginationBtn } from './createMarkup';
-import { getAlert, getWarningAlert } from './alert';
+import { getWarningAlert } from './alert';
 
 const refs = getRefs();
 refs.form.addEventListener('submit', onSearch);
@@ -15,6 +15,7 @@ function onSearch(e) {
   e.preventDefault();
   addLoader();
   clearGallery();
+  newApiService.resetPage();
   newApiService.query = e.currentTarget.elements.delay.value.trim();
   if (newApiService.query === '') {
     return getWarningAlert(), removeLoader(), removePaginationBtn();
@@ -24,5 +25,6 @@ function onSearch(e) {
 }
 
 function onLoadMore() {
-  console.log('message');
+  addLoader();
+  newApiService.getPhoto().then(images => createMarkup(images));
 }
