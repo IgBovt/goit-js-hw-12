@@ -6,7 +6,9 @@ const refs = getRefs();
 
 export function createMarkup(images) {
   const refs = getRefs();
-
+  if (images.hits.length <= 0) {
+    return removePaginationBtn(), removeLoader();
+  }
   refs.container.innerHTML = images.hits
     .map(
       img =>
@@ -45,9 +47,6 @@ export function createMarkup(images) {
   initializeLightbox();
   addPaginationBtn();
   removeLoader();
-  if (refs.container.childElementCount === 0) {
-    removePaginationBtn();
-  }
 }
 
 export function addPaginationBtn() {
