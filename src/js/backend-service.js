@@ -1,12 +1,10 @@
-import { getAlert, getErrorAlert } from './alert';
-// import axios from 'axios';
+import { getErrorAlert } from './alert';
 
 export class NewApiService {
   constructor() {
     this.KEY = '41531809-f9219a766117007ff116a3463';
     this.searchQuery = '';
     this.page = 1;
-    this.total = null;
   }
 
   async getPhoto() {
@@ -21,22 +19,17 @@ export class NewApiService {
 
       const images = await response.json();
 
-      if (images.hits.length <= 0) {
-        getAlert();
-      }
       this.incrementPage();
-      this.total = images.totalHits;
       return images;
     } catch (error) {
-      console.error(error);
       getErrorAlert();
-      removeLoader();
     }
   }
 
   incrementPage() {
     this.page += 1;
   }
+
   resetPage() {
     this.page = 1;
   }
@@ -46,12 +39,5 @@ export class NewApiService {
 
   set query(newQuery) {
     this.searchQuery = newQuery;
-  }
-
-  get query() {
-    return this.searchQuery;
-  }
-  set query(newQuery) {
-    return (this.searchQuery = newQuery);
   }
 }

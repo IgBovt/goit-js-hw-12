@@ -1,16 +1,9 @@
 import { getRefs } from './refs';
-import { removeLoader } from './loaders';
-import { initializeLightbox } from './simpleLightBox';
-import { NewApiService } from './backend-service';
 
 const refs = getRefs();
-const newApiService = new NewApiService();
 
 export function createMarkup(images) {
   const refs = getRefs();
-  if (images.hits.length <= 0) {
-    return removePaginationBtn(), removeLoader();
-  }
   const markup = images.hits
     .map(
       img =>
@@ -47,15 +40,4 @@ export function createMarkup(images) {
     )
     .join('');
   refs.container.insertAdjacentHTML('beforeend', markup);
-  initializeLightbox();
-  addPaginationBtn();
-  removeLoader();
-}
-
-export function addPaginationBtn() {
-  refs.pagBtn.classList.add('btn-showed');
-}
-
-export function removePaginationBtn() {
-  refs.pagBtn.classList.remove('btn-showed');
 }

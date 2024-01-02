@@ -8,3 +8,10 @@ export function addLoader() {
 export function removeLoader() {
   return refs.span.classList.remove('loader');
 }
+export function addPaginationBtn() {
+  refs.pagBtn.classList.add('btn-showed');
+}
+
+export function removePaginationBtn() {
+  refs.pagBtn.classList.remove('btn-showed');
+}
