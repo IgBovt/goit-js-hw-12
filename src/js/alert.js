@@ -34,3 +34,11 @@ export function getWarningAlert() {
     position: 'center',
   });
 }
+
+export function getInfoAlert() {
+  iziToast.info({
+    title: 'Info',
+    message: "We're sorry, but you've reached the end of search results.",
+    position: 'topRight',
+  });
+}

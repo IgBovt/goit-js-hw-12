@@ -8,6 +8,7 @@ export class NewApiService {
     this.itemCount = 40;
     this.orientation = 'horizontal';
     this.imageType = 'photo';
+    this.total = null;
   }
 
   async getPhoto() {
@@ -21,6 +22,7 @@ export class NewApiService {
       }
       const images = await response.json();
       this.incrementPage();
+      this.total = images.totalHits;
       return images;
     } catch (error) {
       getErrorAlert();
@@ -34,6 +36,11 @@ export class NewApiService {
   resetPage() {
     this.page = 1;
   }
+
+  resetTotal() {
+    this.total = null;
+  }
+
   get query() {
     return this.searchQuery;
   }

@@ -8,7 +8,7 @@ import {
 import { clearGallery } from './clearGallery';
 import { NewApiService } from './backend-service';
 import { createMarkup } from './createMarkup';
-import { getAlert, getWarningAlert } from './alert';
+import { getAlert, getWarningAlert, getInfoAlert } from './alert';
 import { initializeLightbox } from './simpleLightBox';
 
 const refs = getRefs();
@@ -21,12 +21,26 @@ function makeGallery() {
     createMarkup(images);
     removeLoader();
     initializeLightbox();
+
     if (refs.container.childElementCount > 19) {
       addPaginationBtn();
     }
     if (refs.container.childElementCount <= 0) {
       getAlert();
-      removeLoader();
+    }
+    if (
+      newApiService.page * 40 >= newApiService.total &&
+      refs.container.childElementCount > 1
+    ) {
+      removePaginationBtn();
+      getInfoAlert();
+    }
+    if (newApiService.page > 2) {
+      window.scrollBy({
+        top:
+          refs.container.firstElementChild.getBoundingClientRect().height * 2,
+        behavior: 'smooth',
+      });
     }
   });
 }
@@ -37,6 +51,7 @@ function onSearch(e) {
   addLoader();
   clearGallery();
   newApiService.resetPage();
+  newApiService.resetTotal();
   newApiService.query = e.currentTarget.elements.delay.value.trim();
 
   if (newApiService.query === '') {

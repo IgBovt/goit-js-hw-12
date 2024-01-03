@@ -7,7 +7,7 @@ export function createMarkup(images) {
   const markup = images.hits
     .map(
       img =>
-        `   <li>
+        `   <li class="item">
             <a class="link" href="${img.largeImageURL}">
             <img
                 class="img"
