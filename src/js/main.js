@@ -30,7 +30,8 @@ function makeGallery() {
     }
     if (
       newApiService.page * 40 >= newApiService.total &&
-      refs.container.childElementCount > 1
+      refs.container.childElementCount > 1 &&
+      newApiService.page > 2
     ) {
       removePaginationBtn();
       getInfoAlert();
