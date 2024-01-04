@@ -1,4 +1,5 @@
 import { getErrorAlert } from './alert';
+import axios from 'axios';
 
 export class NewApiService {
   constructor() {
@@ -10,25 +11,19 @@ export class NewApiService {
     this.imageType = 'photo';
     this.total = null;
   }
-
-  async getPhoto() {
+  getPhoto = async () => {
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `https://pixabay.com/api/?key=${this.KEY}&q=${this.searchQuery}&image_type=${this.imageType}&orientation=${this.orientation}&per_page=${this.itemCount}&page=${this.page}`
       );
-
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      const images = await response.json();
+      const images = response.data;
       this.incrementPage();
       this.total = images.totalHits;
       return images;
     } catch (error) {
       getErrorAlert();
     }
-  }
-
+  };
   incrementPage() {
     this.page += 1;
   }
