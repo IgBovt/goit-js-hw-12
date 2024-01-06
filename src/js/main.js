@@ -22,7 +22,7 @@ function makeGallery() {
     removeLoader();
     initializeLightbox();
 
-    if (refs.container.childElementCount > 19) {
+    if (refs.container.childElementCount > 39) {
       addPaginationBtn();
     }
     if (refs.container.childElementCount <= 0) {
