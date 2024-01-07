@@ -1,4 +1,5 @@
 import { getRefs } from './refs';
+import { addSearchText } from './loaders&buttons';
 
 export function createMarkup(images) {
   const refs = getRefs();
@@ -38,4 +39,5 @@ export function createMarkup(images) {
     )
     .join('');
   refs.container.insertAdjacentHTML('beforeend', markup);
+  addSearchText();
 }
