@@ -111,7 +111,23 @@ body {
 .btn-showed {
   display: block;
 }
-
+.search-text {
+  display: none;
+}
+.is-showed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  font-size: 14px;
+  color: #6e6e6e;
+}
+.text-span {
+  margin-left: 8px;
+  margin-right: 8px;
+  font-weight: bold;
+  color: #000;
+}
 .loader {
   transform: rotateZ(45deg);
   perspective: 1000px;

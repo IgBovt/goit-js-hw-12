@@ -1,7 +1,5 @@
 import { getRefs } from './refs';
 
-const refs = getRefs();
-
 export function createMarkup(images) {
   const refs = getRefs();
   const markup = images.hits

@@ -5,5 +5,8 @@ export function getRefs() {
     container: document.querySelector('.js-gallery'),
     span: document.querySelector('.js-loader'),
     pagBtn: document.querySelector('.js-pag-btn'),
+    totalCount: document.querySelector('.js-count'),
+    textRequest: document.querySelector('.js-request'),
+    searchText: document.querySelector('.js-search-text'),
   };
 }

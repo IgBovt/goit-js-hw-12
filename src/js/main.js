@@ -4,6 +4,8 @@ import {
   removeLoader,
   addPaginationBtn,
   removePaginationBtn,
+  addSearchText,
+  removeSearchText,
 } from './loaders&buttons';
 import { clearGallery } from './clearGallery';
 import { NewApiService } from './backend-service';
@@ -21,6 +23,8 @@ function makeGallery() {
     createMarkup(images);
     removeLoader();
     initializeLightbox();
+    refs.textRequest.textContent = `"${newApiService.searchQuery}"`;
+    refs.totalCount.textContent = `"${newApiService.total}"`;
 
     if (refs.container.childElementCount > 39) {
       addPaginationBtn();
@@ -49,6 +53,7 @@ function makeGallery() {
 function onSearch(e) {
   e.preventDefault();
   removePaginationBtn();
+  removeSearchText();
   addLoader();
   clearGallery();
   newApiService.resetPage();
@@ -56,8 +61,14 @@ function onSearch(e) {
   newApiService.query = e.currentTarget.elements.delay.value.trim();
 
   if (newApiService.query === '') {
-    return getWarningAlert(), removeLoader(), removePaginationBtn();
+    return (
+      getWarningAlert(),
+      removeLoader(),
+      removePaginationBtn(),
+      removeSearchText()
+    );
   }
+  addSearchText();
   makeGallery();
   e.currentTarget.reset();
 }
