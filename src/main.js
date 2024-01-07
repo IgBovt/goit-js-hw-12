@@ -8,7 +8,7 @@ import {
   removeSearchText,
 } from './js/loaders&buttons';
 import { clearGallery } from './js/clearGallery';
-import { NewApiService } from './js/backend-service';
+import { PixabayAPI } from './js/backend-service';
 import { createMarkup } from './js/createMarkup';
 import {
   getAlert,
@@ -19,7 +19,7 @@ import {
 import { initializeLightbox } from './js/simpleLightBox';
 
 const refs = getRefs();
-const newApiService = new NewApiService();
+const pixabayAPI = new PixabayAPI();
 refs.form.addEventListener('submit', onSearch);
 refs.pagBtn.addEventListener('click', onLoadMore);
 
@@ -29,11 +29,11 @@ function onSearch(e) {
   removeSearchText();
   addLoader();
   clearGallery();
-  newApiService.resetPage();
-  newApiService.resetTotal();
-  newApiService.query = e.currentTarget.elements.delay.value.trim();
+  pixabayAPI.resetPage();
+  pixabayAPI.resetTotal();
+  pixabayAPI.query = e.currentTarget.elements.delay.value.trim();
 
-  if (newApiService.query === '') {
+  if (pixabayAPI.query === '') {
     return (
       getWarningAlert(),
       removeLoader(),
@@ -51,30 +51,30 @@ function onLoadMore() {
 }
 
 function makeGallery() {
-  newApiService
+  pixabayAPI
     .getPhoto()
     .then(images => {
       createMarkup(images);
       removeLoader();
       initializeLightbox();
-      refs.textRequest.textContent = `"${newApiService.searchQuery}"`;
-      refs.totalCount.textContent = `"${newApiService.total}"`;
+      refs.textRequest.textContent = `"${pixabayAPI.searchQuery}"`;
+      refs.totalCount.textContent = `"${pixabayAPI.total}"`;
 
-      if (newApiService.total > 40) {
+      if (pixabayAPI.total > 40) {
         addPaginationBtn();
       }
       if (refs.container.childElementCount <= 0) {
         getAlert();
       }
       if (
-        (newApiService.page - 1) * 40 >= newApiService.total &&
+        (pixabayAPI.page - 1) * 40 >= pixabayAPI.total &&
         refs.container.childElementCount > 1 &&
-        newApiService.page > 2
+        pixabayAPI.page > 2
       ) {
         removePaginationBtn();
         getInfoAlert();
       }
-      if (newApiService.page > 2) {
+      if (pixabayAPI.page > 2) {
         window.scrollBy({
           top:
             refs.container.firstElementChild.getBoundingClientRect().height * 2,
