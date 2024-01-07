@@ -1,4 +1,4 @@
-import { getRefs } from './refs';
+import { getRefs } from './js/refs';
 import {
   addLoader,
   removeLoader,
@@ -6,17 +6,17 @@ import {
   removePaginationBtn,
   addSearchText,
   removeSearchText,
-} from './loaders&buttons';
-import { clearGallery } from './clearGallery';
-import { NewApiService } from './backend-service';
-import { createMarkup } from './createMarkup';
+} from './js/loaders&buttons';
+import { clearGallery } from './js/clearGallery';
+import { NewApiService } from './js/backend-service';
+import { createMarkup } from './js/createMarkup';
 import {
   getAlert,
   getWarningAlert,
   getInfoAlert,
   getErrorAlert,
-} from './alert';
-import { initializeLightbox } from './simpleLightBox';
+} from './js/alert';
+import { initializeLightbox } from './js/simpleLightBox';
 
 const refs = getRefs();
 const newApiService = new NewApiService();
