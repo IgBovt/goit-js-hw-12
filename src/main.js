@@ -4,7 +4,6 @@ import {
   removeLoader,
   addPaginationBtn,
   removePaginationBtn,
-  addSearchText,
   removeSearchText,
 } from './js/loaders&buttons';
 import { clearGallery } from './js/clearGallery';
@@ -50,37 +49,37 @@ function onLoadMore() {
   makeGallery();
 }
 
-function makeGallery() {
-  pixabayAPI
-    .getPhoto()
-    .then(images => {
-      createMarkup(images);
-      removeLoader();
-      initializeLightbox();
-      refs.textRequest.textContent = `"${pixabayAPI.searchQuery}"`;
-      refs.totalCount.textContent = `"${pixabayAPI.total}"`;
+async function makeGallery() {
+  try {
+    const images = await pixabayAPI.getPhoto();
+    createMarkup(images);
+    removeLoader();
+    initializeLightbox();
+    refs.textRequest.textContent = `"${pixabayAPI.searchQuery}"`;
+    refs.totalCount.textContent = `"${pixabayAPI.total}"`;
 
-      if (pixabayAPI.total > 40) {
-        addPaginationBtn();
-      }
-      if (refs.container.childElementCount <= 0) {
-        getAlert();
-      }
-      if (
-        (pixabayAPI.page - 1) * 40 >= pixabayAPI.total &&
-        refs.container.childElementCount > 1 &&
-        pixabayAPI.page > 2
-      ) {
-        removePaginationBtn();
-        getInfoAlert();
-      }
-      if (pixabayAPI.page > 2) {
-        window.scrollBy({
-          top:
-            refs.container.firstElementChild.getBoundingClientRect().height * 2,
-          behavior: 'smooth',
-        });
-      }
-    })
-    .catch(getErrorAlert);
+    if (pixabayAPI.total > 40) {
+      addPaginationBtn();
+    }
+    if (refs.container.childElementCount <= 0) {
+      getAlert();
+    }
+    if (
+      (pixabayAPI.page - 1) * 40 >= pixabayAPI.total &&
+      refs.container.childElementCount > 1 &&
+      pixabayAPI.page > 2
+    ) {
+      removePaginationBtn();
+      getInfoAlert();
+    }
+    if (pixabayAPI.page > 2) {
+      window.scrollBy({
+        top:
+          refs.container.firstElementChild.getBoundingClientRect().height * 2,
+        behavior: 'smooth',
+      });
+    }
+  } catch {
+    getErrorAlert();
+  }
 }
