@@ -51,8 +51,7 @@ function onLoadMore() {
 
 async function makeGallery() {
   try {
-    const images = await pixabayAPI.getPhoto();
-    createMarkup(images);
+    createMarkup(await pixabayAPI.getPhoto());
     removeLoader();
     initializeLightbox();
     refs.textRequest.textContent = `"${pixabayAPI.searchQuery}"`;
